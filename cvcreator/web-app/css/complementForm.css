@@ -1,0 +1,65 @@
+.competences {
+	display:inline-block;
+	width:70%;
+}
+
+.champSaisie{
+	background-color: #fcfcfc;
+	border: 1px solid #cccccc;
+	font-size: 1em;
+	padding: 0.2em 0.2em 0.2em 0;
+	letter-spacing: normal;
+	word-spacing: normal;
+	text-transform: none;
+	text-indent: 0px;
+	text-shadow: none;
+	display: inline-block;
+	text-align: start;
+}
+
+.sousLabel {
+	display:inline-block;
+	color: #666666;
+	text-align: right;
+	width: 20%;
+}
+
+.champSaisieSousLabel {
+	display:inline-block;
+	width: 60%;	
+}
+
+.lignesExperiences {
+	display:block;
+	color: #666666;
+	text-align: right;
+	width: 40%;	
+}
+
+.champSaisieExperience{
+	background-color: #fcfcfc;
+	border: 1px solid #cccccc;
+	font-size: 1em;
+	padding: 0.2em 0.2em 0.2em 0;
+	letter-spacing: normal;
+	word-spacing: normal;
+	text-transform: none;
+	text-indent: 0px;
+	text-shadow: none;
+	display: inline-block;
+	text-align: start;
+}
+
+.titreForm {
+	color: #666666;
+	text-align: right;
+	width: 10%;	
+}
+
+
+.titreExperience {
+	display:block;
+	color: #666666;
+	text-align: right;
+	width: 30%;	
+}
