@@ -1,0 +1,50 @@
+!SESSION 2013-03-26 16:41:28.939 -----------------------------------------------
+eclipse.buildId=3.1.0.201210061306-RELEASE-e42
+java.version=1.7.0_01
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=fr_FR
+Framework arguments:  -product org.springsource.ggts.ide
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.springsource.ggts.ide
+
+!ENTRY org.springsource.ide.eclipse.commons.frameworks.core 0 0 2013-03-26 16:41:51.458
+!MESSAGE Result of converting legacy STS 2.x workspace preferences to 3.x
+!SUBENTRY 1 org.springsource.ide.eclipse.commons.frameworks.core 0 0 2013-03-26 16:41:51.458
+!MESSAGE Converted legacy STS plugin preferences
+!SUBENTRY 1 unknown 0 0 2013-03-26 16:41:51.458
+!MESSAGE OK
+!SUBENTRY 1 org.springsource.ide.eclipse.commons.frameworks.core 0 0 2013-03-26 16:41:51.458
+!MESSAGE Converted legacy Roo plugin state locations
+!SUBENTRY 1 org.springsource.ide.eclipse.commons.frameworks.core 0 0 2013-03-26 16:41:51.458
+!MESSAGE Converted legacy STS plugin state locations
+
+!ENTRY org.eclipse.core.resources 4 2 2013-03-26 16:44:11.094
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.core.resources".
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.jdt.internal.core.ExternalPackageFragmentRoot.hashCode(ExternalPackageFragmentRoot.java:99)
+	at java.util.Hashtable.get(Hashtable.java:357)
+	at org.eclipse.jdt.internal.core.util.LRUCache.peek(LRUCache.java:481)
+	at org.eclipse.jdt.internal.core.JavaModelCache.peekAtInfo(JavaModelCache.java:188)
+	at org.eclipse.jdt.internal.core.JavaModelManager.removeInfoAndChildren(JavaModelManager.java:3789)
+	at org.eclipse.jdt.internal.core.JavaElement.close(JavaElement.java:95)
+	at org.eclipse.jdt.internal.core.ClasspathChange.addClasspathDeltas(ClasspathChange.java:63)
+	at org.eclipse.jdt.internal.core.ClasspathChange.generateDelta(ClasspathChange.java:354)
+	at org.eclipse.jdt.internal.core.DeltaProcessor.resourceChanged(DeltaProcessor.java:2052)
+	at org.eclipse.jdt.internal.core.DeltaProcessingState.resourceChanged(DeltaProcessingState.java:470)
+	at org.eclipse.core.internal.events.NotificationManager$1.run(NotificationManager.java:291)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.NotificationManager.notify(NotificationManager.java:285)
+	at org.eclipse.core.internal.events.NotificationManager.broadcastChanges(NotificationManager.java:149)
+	at org.eclipse.core.internal.resources.Workspace.broadcastPostChange(Workspace.java:395)
+	at org.eclipse.core.internal.resources.Workspace.endOperation(Workspace.java:1530)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2353)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:793)
+	at org.eclipse.jdt.internal.core.JavaProject.setRawClasspath(JavaProject.java:3102)
+	at org.eclipse.jdt.internal.core.JavaProject.setRawClasspath(JavaProject.java:3064)
+	at org.eclipse.jdt.internal.core.JavaProject.setRawClasspath(JavaProject.java:3117)
+	at org.grails.ide.eclipse.core.workspace.GrailsProject.setClassPath(GrailsProject.java:129)
+	at org.grails.ide.eclipse.commands.GrailsCommandUtils.eclipsifyProject(GrailsCommandUtils.java:238)
+	at org.grails.ide.eclipse.commands.GrailsCommandUtils.eclipsifyProject(GrailsCommandUtils.java:110)
+	at org.grails.ide.eclipse.core.wizard.GrailsImportWizardCore.perform(GrailsImportWizardCore.java:261)
+	at org.grails.ide.eclipse.ui.internal.wizard.inport.GrailsImportWizard$1.run(GrailsImportWizard.java:77)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)

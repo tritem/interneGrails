@@ -14,7 +14,7 @@
 /eclipse
 */target/*
 */target-eclipse/*
-/.metadata
+
 /Servers
 
 # default HSQL database files for production mode
