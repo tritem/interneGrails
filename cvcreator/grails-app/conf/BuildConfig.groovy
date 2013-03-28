@@ -53,7 +53,7 @@ grails.project.dependency.resolution = {
         compile ':cache:1.0.0'
 		compile ":richui:0.8"
 		compile ":rendering:0.4.3"
-		compile ":cloud-foundry:1.2.3"
+//		compile ":cloud-foundry:1.2.3" // Décommenter pour déployer
 		compile ":jquery:1.8.3"
 		compile ":jquery-ui:1.8.24"
     }

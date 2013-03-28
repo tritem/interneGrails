@@ -96,6 +96,3 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
-
-grails.plugin.cloudfoundry.username = "cara.loic@gmail.com"
-grails.plugin.cloudfoundry.password = "1VP78gLS"
