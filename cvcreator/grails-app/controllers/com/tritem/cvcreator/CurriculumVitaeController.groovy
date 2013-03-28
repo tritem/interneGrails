@@ -97,7 +97,7 @@ class CurriculumVitaeController {
     }
 
     def update(Long id, Long version) {
-		log.debug("> -- update params:${params}")
+		log.debug("--> update params:${params}")
 		def listesLignesExp = [:]
 		int i=0
 
@@ -153,10 +153,11 @@ class CurriculumVitaeController {
         }
 		
 		curriculumVitaeService.executerToDelete(curriculumVitaeInstance)
+		println "controller : "+curriculumVitaeInstance.formations
         flash.message = message(code: 'default.updated.message', args: [message(code: 'curriculumVitae.label', default: 'CurriculumVitae'), curriculumVitaeInstance.id])
         redirect(action: "show", id: curriculumVitaeInstance.id)
 		
-		log.debug("< -- update params:${params}")
+		log.debug("--< update params:${params}")
     }
 
     def delete(Long id) {

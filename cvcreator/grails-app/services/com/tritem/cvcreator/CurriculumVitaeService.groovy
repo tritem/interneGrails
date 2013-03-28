@@ -5,21 +5,23 @@ import java.util.List;
 class CurriculumVitaeService {
 	
 	def executerToDelete(CurriculumVitae cv){
-		// Récupération de toutes les formations à supprimer
-		cv.formations.removeAll{
-			it.toDelete
+		cv.formations.findAll{it.toDelete}.each {Formation formation ->
+			cv.removeFromFormations(formation)
+			formation.delete()
 		}
 		
-		cv.experiences.removeAll{
-			it.toDelete
+		cv.experiences.findAll{it.toDelete}.each {Experience experience ->
+			cv.removeFromExperiences(experience)
+			experience.delete()
 		}
 		
-		cv.experiences.each {
-			it.lignesExperience.removeAll{
-				it.toDelete
+		cv.experiences.each {Experience experience ->
+			experience.lignesExperience.findAll{it.toDelete}.each {LigneExperience ligneExperience ->
+				experience.removeFromLignesExperience(ligneExperience)
+				ligneExperience.delete()
 			}
 		}
-		
-		cv.save(true)		
+
+		cv.save(true)
 	}
 }

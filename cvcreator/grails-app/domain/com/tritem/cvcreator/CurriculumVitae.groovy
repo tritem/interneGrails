@@ -24,6 +24,11 @@ class CurriculumVitae {
 		lastUpdated nullable:true
     }
 	
+	static mapping = {
+		experiences indexColumn:"idx"
+		formations indexColumn:"idx"
+	}
+	
 	def getCompetencesTriees(){
 		def compTriees = [:]
 		TypeCompetence.list().each{
