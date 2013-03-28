@@ -97,14 +97,15 @@ class CurriculumVitaeController {
     }
 
     def update(Long id, Long version) {
+		log.debug("> -- update params:${params}")
 		def listesLignesExp = [:]
 		int i=0
-		
+
 		while (params."lignesExperience[${i}]") {
 			LigneExperience ligneExp = new LigneExperience()
 			ligneExp.idTechnique = params.long("lignesExperience[${i}].idTechnique")
 			ligneExp.libelle =  params."lignesExperience[${i}].libelle"
-			ligneExp.toDelete =  params."lignesExperience[${i}].toDelete"
+			ligneExp.toDelete =  Boolean.valueOf(params."lignesExperience[${i}].toDelete").booleanValue()
 			ligneExp.htmlIdExperience =  params."lignesExperience[${i}].htmlIdExperience"
 			ligneExp.idxExp =  params.long("lignesExperience[${i}].idxExp") ?: 0
 			
@@ -141,6 +142,7 @@ class CurriculumVitaeController {
 					experience.addToLignesExperience(ligneExperience)
 				} else {
 					experience.lignesExperience[ligneExperience.idxExp].libelle = ligneExperience.libelle
+					experience.lignesExperience[ligneExperience.idxExp].toDelete = ligneExperience.toDelete
 				}
 			}
 		}		
@@ -149,9 +151,12 @@ class CurriculumVitaeController {
             render(view: "edit", model: [curriculumVitaeInstance: curriculumVitaeInstance])
             return	
         }
+		
 		curriculumVitaeService.executerToDelete(curriculumVitaeInstance)
         flash.message = message(code: 'default.updated.message', args: [message(code: 'curriculumVitae.label', default: 'CurriculumVitae'), curriculumVitaeInstance.id])
         redirect(action: "show", id: curriculumVitaeInstance.id)
+		
+		log.debug("< -- update params:${params}")
     }
 
     def delete(Long id) {
