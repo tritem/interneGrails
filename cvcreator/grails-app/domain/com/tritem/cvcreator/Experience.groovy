@@ -7,24 +7,23 @@ import org.h2.table.IndexColumn;
 class Experience {
 
 	String periode
-	String libelle
-	String poste
+	String client
+	List projets
 	String htmlId
 	boolean toDelete
 	
     static constraints = {
 		periode nullable:false
-		libelle nullable:false
-		poste nullable:false
+		client nullable:false
+		//projets validator: { val, obj -> obj?.projets?.size() > 0 ?: "test error validator"}
     }
 
-	List lignesExperience
-	static hasMany=[lignesExperience:LigneExperience]
+	static hasMany=[projets:Projet]
 	
 	static belongTo = [curriculumVitae:CurriculumVitae]
 	
 	static mapping =  {
-		lignesExperience indexColumn:"idx"
+		projets indexColumn:"idx"
 	}
 	
 	static transients = [ 'htmlId' ]

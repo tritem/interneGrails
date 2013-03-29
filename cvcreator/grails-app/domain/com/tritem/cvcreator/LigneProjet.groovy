@@ -1,16 +1,16 @@
 package com.tritem.cvcreator
 
-class LigneExperience {
+class LigneProjet {
 
 	String libelle
 	boolean toDelete
-	String htmlIdExperience
+	String htmlIdProjet
 	Long idTechnique
-	int idxExp
+	int idxProjet
 	
-	static belongsTo=[experience:Experience]
+	static belongsTo=[projet:Projet]
 	
-	static transients = [ 'htmlIdExperience', 'idTechnique', 'idxExp']
+	static transients = [ 'htmlIdProjet', 'idTechnique', 'idxProjet']
 	
     static constraints = {
 		libelle nullable:false

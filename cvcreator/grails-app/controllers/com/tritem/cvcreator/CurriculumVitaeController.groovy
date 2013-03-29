@@ -102,7 +102,7 @@ class CurriculumVitaeController {
 		int i=0
 
 		while (params."lignesExperience[${i}]") {
-			LigneExperience ligneExp = new LigneExperience()
+			LigneProjet ligneExp = new LigneProjet()
 			ligneExp.idTechnique = params.long("lignesExperience[${i}].idTechnique")
 			ligneExp.libelle =  params."lignesExperience[${i}].libelle"
 			ligneExp.toDelete =  Boolean.valueOf(params."lignesExperience[${i}].toDelete").booleanValue()
@@ -137,7 +137,7 @@ class CurriculumVitaeController {
 		curriculumVitaeInstance.properties = params
 		
 		curriculumVitaeInstance.experiences.each {Experience experience ->
-			listesLignesExp.get(experience.htmlId).each {LigneExperience ligneExperience ->
+			listesLignesExp.get(experience.htmlId).each {LigneProjet ligneExperience ->
 				if (!ligneExperience.idTechnique){
 					experience.addToLignesExperience(ligneExperience)
 				} else {

@@ -90,9 +90,15 @@ class BootstrapService {
 //		formation2.save(true)
 //		assert Formation.count == 2
 		
+		// Initialisation des projets
+		Projet projet1 = new Projet(periode: "Août 2012 - Février 2013", poste:"Ingénieur Commercial", titre:"Responsable d'agence",
+			description:"Gerer une agence", competences:"Windows XP")
+		projet1.addToLignesProjet(new LigneProjet(libelle:"l 11"))
+		
+		
 		// Initialisation des expériences
-		Experience experience1 = new Experience(periode:"Août 2012 - Février 2013", libelle:"Tritem, Nantes :", poste:"Ingénieur Commercial")
-		experience1.addToLignesExperience(new LigneExperience(exp:experience1, libelle:"l 11"))
+		Experience experience1 = new Experience(periode:"Août 2012 - Février 2013", client:"Tritem, Nantes")
+		experience1.addToProjets(projet1)
 		experience1.save()
 		assert Experience.count == 1
 		
@@ -104,8 +110,8 @@ class BootstrapService {
 		cvSebastienTalmant.addToCompetences(compGrails22)
 		
 		cvSebastienTalmant.addToExperiences(experience1)
-		cvSebastienTalmant.addToFormations(new Formation(periode:"2000 - 2002", libelle:"Ecole de commerce", diplome:"Master 2 en commerce"))
-		cvSebastienTalmant.addToFormations(new Formation(periode:"1998 - 2000", libelle:"Autre école", diplome:"Autre diplôme"))
+		cvSebastienTalmant.addToFormations(new Formation(periode:"2000 - 2002", libelle:"Master 2 en commerce - Ecole de commerce"))
+		cvSebastienTalmant.addToFormations(new Formation(periode:"1998 - 2000", libelle:"Autre diplôme"))
 		cvSebastienTalmant.save()
 		
 		assert CurriculumVitae.count == 1

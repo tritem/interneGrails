@@ -16,7 +16,7 @@ class CurriculumVitaeService {
 		}
 		
 		cv.experiences.each {Experience experience ->
-			experience.lignesExperience.findAll{it.toDelete}.each {LigneExperience ligneExperience ->
+			experience.lignesExperience.findAll{it.toDelete}.each {LigneProjet ligneExperience ->
 				experience.removeFromLignesExperience(ligneExperience)
 				ligneExperience.delete()
 			}

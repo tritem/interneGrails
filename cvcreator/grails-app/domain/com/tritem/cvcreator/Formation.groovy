@@ -4,7 +4,6 @@ class Formation {
 
 	String periode
 	String libelle
-	String diplome
 	
 	boolean toDelete
 	
