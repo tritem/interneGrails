@@ -86,33 +86,62 @@ class CurriculumVitaeController {
 		def toutesCompetencesTriees = [:]
 		toutesCompetencesTriees = competenceService.getToutesCompetencesTriees()
 		def listesExperiencesTriees = [:]
-		int nbLignesExp = 0
+		int nbLignesProjet = 0
+		int nbProjet = 0
 		curriculumVitaeInstance.experiences.each { Experience experience ->
-			nbLignesExp += experience.lignesExperience.size()
+			nbProjet += experience.projets.size()
+			experience.projets.each{Projet projet ->
+				nbLignesProjet += projet.lignesProjet.size()
+			}
 		}
 		
         [curriculumVitaeInstance: curriculumVitaeInstance,
 			toutesCompetencesTriees:toutesCompetencesTriees,
-			nbLignesExp:nbLignesExp]
+			nbProjet:nbProjet,
+			nbLignesProjet:nbLignesProjet]
     }
 
     def update(Long id, Long version) {
-		log.debug("--> update params:${params}")
+		log.debug("update --> params:${params}")
 		def listesLignesExp = [:]
+		def listesProjets = [:]
 		int i=0
 
-		while (params."lignesExperience[${i}]") {
-			LigneProjet ligneExp = new LigneProjet()
-			ligneExp.idTechnique = params.long("lignesExperience[${i}].idTechnique")
-			ligneExp.libelle =  params."lignesExperience[${i}].libelle"
-			ligneExp.toDelete =  Boolean.valueOf(params."lignesExperience[${i}].toDelete").booleanValue()
-			ligneExp.htmlIdExperience =  params."lignesExperience[${i}].htmlIdExperience"
-			ligneExp.idxExp =  params.long("lignesExperience[${i}].idxExp") ?: 0
-			
-			if (!listesLignesExp.get(params."lignesExperience[${i}].htmlIdExperience")){
-				listesLignesExp.put(params."lignesExperience[${i}].htmlIdExperience", [])
+		// Construction de la collection des projets
+		while (params."projets[${i}]") {
+			Projet projet = new Projet()
+			projet.idTechnique = params.long("projets[${i}].idTechnique")
+			projet.periode = params."projets[${i}].periode"
+			projet.poste = params."projets[${i}].poste"
+			projet.titre = params."projets[${i}].titre"
+			projet.description = params."projets[${i}].description"
+			projet.competences = params."projets[${i}].competences"
+			projet.htmlId = params."projets[${i}].htmlId"
+			projet.htmlIdExperience = params."projets[${i}].htmlIdExperience"
+			projet.toDelete = params."projets[${i}].toDelete"
+			if (!listesProjets.get(params."lignesExperience[${i}].htmlIdExperience")){
+				listesProjets.put(params."lignesExperience[${i}].htmlIdExperience", [])
 			}
-			listesLignesExp.get(params."lignesExperience[${i}].htmlIdExperience").add(ligneExp)
+			listesProjets.get(params."lignesExperience[${i}].htmlIdExperience").add(projet)
+			log.debug "projets[${i}]:"+projet
+			i++
+		}
+		
+		// Construction de la collection des lignes de projet
+		i=0
+		while (params."lignesProjet[${i}]") {
+			LigneProjet ligneProjet = new LigneProjet()
+			ligneProjet.idTechnique = params.long("lignesProjet[${i}].idTechnique")
+			ligneProjet.libelle =  params."lignesProjet[${i}].libelle"
+			ligneProjet.toDelete =  Boolean.valueOf(params."lignesProjet[${i}].toDelete").booleanValue()
+			ligneProjet.htmlIdProjet =  params."lignesProjet[${i}].htmlIdExperience"
+			ligneProjet.idxProjet =  params.long("lignesProjet[${i}].idxExp") ?: 0
+			
+			if (!listesLignesExp.get(params."lignesProjet[${i}].htmlIdExperience")){
+				listesLignesExp.put(params."lignesProjet[${i}].htmlIdExperience", [])
+			}
+			listesLignesExp.get(params."lignesProjet[${i}].htmlIdExperience").add(ligneProjet)
+			log.debug "lignesProjet[${i}]:"+ligneProjet
 			i++
 		}
 		

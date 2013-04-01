@@ -11,6 +11,7 @@ class Projet {
 	String competences
 	String htmlId
 	String htmlIdExperience
+	Long idTechnique
 	boolean toDelete
 	
 	List lignesProjet
@@ -29,5 +30,9 @@ class Projet {
 		lignesProjet indexColumn:"idx"
 	}
 	
-	static transients = [ 'htmlId', 'htmlIdExperience' ]
+	static transients = [ 'htmlId', 'htmlIdExperience', 'idTechnique']
+	
+	String toString(){
+		return "id[${id}] periode[${periode}] poste[${poste}] titre[${titre}]"
+	}
 }

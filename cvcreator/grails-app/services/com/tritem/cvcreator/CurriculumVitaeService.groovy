@@ -16,12 +16,20 @@ class CurriculumVitaeService {
 		}
 		
 		cv.experiences.each {Experience experience ->
-			experience.lignesExperience.findAll{it.toDelete}.each {LigneProjet ligneExperience ->
-				experience.removeFromLignesExperience(ligneExperience)
-				ligneExperience.delete()
+			experience.projets.findAll{it.toDelete}.each {Projet projet ->
+				experience.removeFromProjets(projet)
+				projet.delete()
+			}
+			
+			experience.projets.each {Projet projet ->
+				projet.lignesProjet.findAll {it.toDelete}.each {LigneProjet ligneProjet ->
+					projet.removeFromLignesProjet(ligneProjet)
+					ligneProjet.delete()
+				}
 			}
 		}
 
+		
 		cv.save(true)
 	}
 }

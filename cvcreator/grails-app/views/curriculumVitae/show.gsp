@@ -57,11 +57,11 @@
 					<span id="experiences-label" class="property-label"><g:message code="curriculumVitae.experiences.label" default="Experiences" /></span>
 						<g:each in="${curriculumVitaeInstance.experiences}" var="e">
 							<span class="property-value" aria-labelledby="experiences-label"><g:fieldValue bean="${e}" field="periode"/></span>
-							<span class="property-value" aria-labelledby="experiences-label"><g:fieldValue bean="${e}" field="poste"/></span>
-							<span class="property-value" aria-labelledby="experiences-label"><g:fieldValue bean="${e}" field="libelle"/></span>
-							<g:each in="${e.lignesExperience}" var="l">
-								<span class="property-value" aria-labelledby="experiences-label"><g:fieldValue bean="${l}" field="libelle"/></span>
-							</g:each>
+<%--							<span class="property-value" aria-labelledby="experiences-label"><g:fieldValue bean="${e}" field="poste"/></span>--%>
+<%--							<span class="property-value" aria-labelledby="experiences-label"><g:fieldValue bean="${e}" field="libelle"/></span>--%>
+<%--							<g:each in="${e.lignesExperience}" var="l">--%>
+<%--								<span class="property-value" aria-labelledby="experiences-label"><g:fieldValue bean="${l}" field="libelle"/></span>--%>
+<%--							</g:each>--%>
 							<br />
 						</g:each>
 					
@@ -75,7 +75,7 @@
 						<g:each in="${curriculumVitaeInstance.formations}" var="f">
 							<span class="property-value" aria-labelledby="experiences-label"><g:fieldValue bean="${f}" field="periode"/></span>
 							<span class="property-value" aria-labelledby="experiences-label"><g:fieldValue bean="${f}" field="libelle"/></span>
-							<span class="property-value" aria-labelledby="experiences-label"><g:fieldValue bean="${f}" field="diplome"/></span>
+<%--							<span class="property-value" aria-labelledby="experiences-label"><g:fieldValue bean="${f}" field="diplome"/></span>--%>
 							<br />	
 						</g:each>
 					

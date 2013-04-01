@@ -55,8 +55,6 @@
 				<g:textField name="formations[${k}].periode" value="${formation.periode}" class="champSaisieSousLabel"/>
 				<label for="formations[${k}].libelle" class="sousLabel">Libellé</label>
 				<g:textField name="formations[${k}].libelle" value="${formation.libelle}" class="champSaisieSousLabel"/>
-				<label for="formations[${k}].diplome" class="sousLabel">Diplôme</label>
-				<g:textField name="formations[${k}].diplome" value="${formation.diplome}" class="champSaisieSousLabel"/>
 				<input type="hidden" name='formations[${k}].toDelete' id='formations[${k}].toDelete' value="false"/>
 			</div>
 		</g:each>
@@ -70,7 +68,8 @@
 <div>
 	<div id="experienceList">
 		<p class="titreForm">Expériences</p>
-		<g:set var="counterLigneExperience" value="${0}" />
+		<g:set var="counterLigneProjet" value="${0}" />
+		<g:set var="counterProjets" value="${0}" />
 	    <g:each var="experience" in="${curriculumVitaeInstance.experiences}" status="i">
 	        <div id="experience${i}">
 		        <label class="sousLabel">
@@ -83,36 +82,67 @@
 				</div>
 	        	<label for="experiences[${i}].periode" class="sousLabel">Période</label>
 	        	<g:textField name='experiences[${i}].periode' value='${experience.periode}' class="champSaisieSousLabel" required="required"/>
-	        	<label for="experiences[${i}].poste" class="sousLabel">Poste</label>
-				<g:textField name='experiences[${i}].poste' value='${experience.poste}' class="champSaisieSousLabel" required="required"/>
-				<label for="experiences[${i}].libelle" class="sousLabel">Libellé</label>
-				<g:textField name='experiences[${i}].libelle' value='${experience.libelle}' class="champSaisieSousLabel" required="required"/>
+	        	<label for="experiences[${i}].client" class="sousLabel">Client</label>
+	        	<g:textField name='experiences[${i}].client' value='${experience.client}' class="champSaisieSousLabel" required="required"/>
 			    <input type="hidden" name='experiences[${i}].toDelete' id='experiences[${i}].toDelete' value="false"/>
 			    <input type="hidden" name='experiences[${i}].htmlId' id='experiences[${i}].htmlId' value='${i}'/>
-			    <label class="lignesExperiences">Lignes Expérience</label>
-			    <div>
-				    <div id="lignesExperiencesList${i}">
-					    <g:each var="ligneExperience" in="${experience.lignesExperience}" status="j">
-					    	<div id="ligneExperience${counterLigneExperience}">
-						    	<div class="sousLabel"></div>
-						    	<g:textField name='lignesExperience[${counterLigneExperience}].libelle' value='${ligneExperience.libelle }' class="champSaisieSousLabel"/>
-						    	<input type="hidden" name="lignesExperience[${counterLigneExperience}].experienceId" value="${experience.id}"/>
-						    	<input type="hidden" name="lignesExperience[${counterLigneExperience}].idTechnique" value="${ligneExperience.id}"/>
-						    	<input type="hidden" name="lignesExperience[${counterLigneExperience}].htmlIdExperience" value="${i}"/>
-						    	<input type="hidden" name="lignesExperience[${counterLigneExperience}].toDelete" id="lignesExperience[${counterLigneExperience}].toDelete" value="false"/>
-						    	<input type="hidden" name="lignesExperience[${counterLigneExperience}].idxExp" id="lignesExperience[${counterLigneExperience}].idxExp" value="${j}"/>
-						    	<span onClick="$('#lignesExperience\\[${counterLigneExperience}\\]\\.toDelete').val('true'); $('#ligneExperience${counterLigneExperience}').hide()">
-							    	<img src="${resource(dir:'images/skin', file:'database_delete.png')}" />
-							    </span>
+			    
+			    <label class="lignesExperiences">Projets</label>
+			    <g:each var="projet" in="${experience.projets}" status="j">
+			    	<div id="projet${counterProjets}">
+					    <label class="sousLabel">
+				        	Projet ${j+1}
+				        </label>
+				        <div class="champSaisieSousLabel">
+					        <span onClick="$('#projets\\[${counterProjets}\\]\\.toDelete').val('true'); $('#projet${counterProjets}').hide()">
+								<img src="${resource(dir:'images/skin', file:'database_delete.png')}" />
+							</span>
+						</div>
+				    	<label for="projets[${counterProjets}].periode" class="sousLabel">Période</label>
+		        		<g:textField name='projets[${counterProjets}].periode' value='${projet.periode}' class="champSaisieSousLabel" required="required"/>
+		        		<label for="projets[${counterProjets}].poste" class="sousLabel">Poste</label>
+		        		<g:textField name='projets[${counterProjets}].poste' value='${projet.poste}' class="champSaisieSousLabel" required="required"/>
+		        		<label for="projets[${counterProjets}].titre" class="sousLabel">Titre</label>
+		        		<g:textField name='projets[${counterProjets}].titre' value='${projet.titre}' class="champSaisieSousLabel" required="required"/>
+		        		<label for="projets[${counterProjets}].description" class="sousLabel">Description</label>
+		        		<g:textField name='projets[${counterProjets}].description' value='${projet.description}' class="champSaisieSousLabel" required="required"/>
+		        		<label for="projets[${counterProjets}].competences" class="sousLabel">Env. Technique</label>
+		        		<g:textField name='projets[${counterProjets}].competences' value='${projet.competences}' class="champSaisieSousLabel" required="required"/>
+		        		<input type="hidden" name="projets[${counterProjets}].experienceId" value="${experience.id}"/>
+		        		<input type="hidden" name="projets[${counterProjets}].idTechnique" value="${projet.id}"/>
+		        		<input type="hidden" name="projets[${counterProjets}].htmlIdExperience" value="${j}"/>
+		        		<input type="hidden" name="projets[${counterProjets}].toDelete" id="projets[${counterProjets}].toDelete" value="false"/>
+		        		<input type="hidden" name="projets[${counterProjets}].idxExp" value="${i}"/>
+						<label class="lignesExperiences">Lignes Projet</label>
+						<div>
+							<div id="lignesProjetsList${counterProjets}">
+								<g:each var="ligneProjet" in="${projet.lignesProjet}" status="k">
+									<div id="ligneProjet${counterLigneProjet}">
+										<div class="sousLabel"></div>
+										<g:textField name='lignesProjet[${counterLigneProjet}].libelle' value='${ligneProjet.libelle}' class="champSaisieSousLabel"/>
+								    	<input type="hidden" name="lignesProjet[${counterLigneProjet}].projetId" value="${projet.id}"/>
+								    	<input type="hidden" name="lignesProjet[${counterLigneProjet}].idTechnique" value="${ligneProjet.id}"/>
+								    	<input type="hidden" name="lignesProjet[${counterLigneProjet}].htmlIdProjet" value="${k}"/>
+								    	<input type="hidden" name="lignesProjet[${counterLigneProjet}].toDelete" id="lignesProjet[${counterLigneProjet}].toDelete" value="false"/>
+								    	<input type="hidden" name="lignesProjet[${counterLigneProjet}].idxProjet" id="lignesProjet[${counterLigneProjet}].idxProjet" value="${j}"/>
+								    	<span onClick="$('#lignesProjet\\[${counterLigneProjet}\\]\\.toDelete').val('true'); $('#ligneProjet${counterLigneProjet}').hide()">
+							    			<img src="${resource(dir:'images/skin', file:'database_delete.png')}" />
+				   						</span>
+									</div>
+									<g:set var="counterLigneProjet" value="${counterLigneProjet + 1}" />
+								</g:each>
 							</div>
-							<g:set var="counterLigneExperience" value="${counterLigneExperience + 1}" />
-					    </g:each>
-			    	</div>
-			    	<div class="sousLabel"></div>
-			    	<div class="champSaisieSousLabel">
-				    	<input type="button" value="Ajouter Ligne Expérience" onclick="addLigneExperience(${experience.id}, ${i});" />
-				    </div>
-			    </div>
+							<div class='sousLabel'></div>
+							<div class="champSaisieSousLabel">
+								<input type="button" value="Ajouter Ligne Projet" onclick="addLigneProjet(${projet.id}, ${j});" />
+							</div>
+						</div>
+	        		</div>
+	        		<g:set var="counterProjets" value="${counterProjets + 1}" />
+			    </g:each>
+			</div>
+			<div class="champSaisieSousLabel">
+				<input type="button" value="Ajouter Projet" onclick="addProjet(${experience.id}, ${i});" />
 			</div>
 	    </g:each>
 	</div>
@@ -122,7 +152,8 @@
 <script type="text/javascript">
 
 	var experienceCount = ${curriculumVitaeInstance?.experiences.size()} + 0;
-    var lignesExperienceCount = ${nbLignesExp} + 0;
+	var projetCount = ${nbProjet} + 0;
+    var lignesProjetCount = ${nbLignesProjet} + 0;
 	var formationsCount = ${curriculumVitaeInstance?.formations.size()} + 0;
 	var deleteIcon = "${resource(dir:'images/skin', file:'database_delete.png')}";
 	
@@ -137,31 +168,78 @@
         templateHtml += "<input type='text' name='formations["+formationsCount+"].periode' class='champSaisieSousLabel' id='formations[" + formationsCount + "].periode' required='required'/>\n";
         templateHtml += "<label for='formations["+formationsCount+"].libelle' class='sousLabel'>Libellé</label>\n";
         templateHtml += "<input type='text' name='formations["+formationsCount+"].libelle' class='champSaisieSousLabel' id='formations[" + formationsCount + "].libelle' required='required'/>\n";
-        templateHtml += "<label for='formations["+formationsCount+"].diplome' class='sousLabel'>Diplôme</label>\n";
-        templateHtml += "<input type='text' name='formations["+formationsCount+"].diplome' class='champSaisieSousLabel' id='formations[" + formationsCount + "].diplome' required='required'/>\n";
         $("#formationList").append(templateHtml);
 		formationsCount++;
 	}
     
-    function addLigneExperience(experienceId, htmlIdExperience) {
-        var htmlId = "ligneExperience" + lignesExperienceCount;
-        var idDivToAppend="#lignesExperiencesList"+htmlIdExperience
+    function addLigneProjet(projetId, htmlIdProjet) {
+        var htmlId = "ligneProjet" + lignesProjetCount;
+        var idDivToAppend="#lignesProjetsList"+htmlIdProjet
         var templateHtml = "<div id='" + htmlId + "'>\n";
         templateHtml += "<div class='sousLabel'></div>"
-        templateHtml += "<input type='text' name='lignesExperience[" + lignesExperienceCount + "].libelle' class='champSaisieSousLabel' id='lignesExperience[" + lignesExperienceCount + "].libelle'/>\n";
-        if (experienceId != null){
-        	templateHtml += "<input type='hidden' name='lignesExperience["+ lignesExperienceCount + "].experienceId' value='"+experienceId+"'/>";
+        templateHtml += "<input type='text' name='lignesProjet[" + lignesProjetCount + "].libelle' class='champSaisieSousLabel' id='lignesProjet[" + lignesProjetCount + "].libelle'/>\n";
+        if (projetId != null){
+        	templateHtml += "<input type='hidden' name='lignesProjet["+ lignesProjetCount + "].projetId' value='"+projetId+"'/>";
         }
-        templateHtml += "<input type='hidden' name='lignesExperience["+ lignesExperienceCount + "].htmlIdExperience' value='"+htmlIdExperience+"'/>";
-        templateHtml += "<input type='hidden' id='lignesExperience["+ lignesExperienceCount + "].toDelete' name='lignesExperience["+ lignesExperienceCount + "].toDelete' value='"+false+"'/>";
-        templateHtml += "<span onClick='$(\"#lignesExperience\\\\["+ lignesExperienceCount + "\\\\]\\\\.toDelete\").val(\"true\");$(\"#" + htmlId + "\").hide();'><img src='" + deleteIcon + "' /></span>\n";
+        templateHtml += "<input type='hidden' name='lignesProjet["+ lignesProjetCount + "].htmlIdProjet' value='"+htmlIdProjet+"'/>";
+        templateHtml += "<input type='hidden' id='lignesProjet["+ lignesProjetCount + "].toDelete' name='lignesProjet["+ lignesProjetCount + "].toDelete' value='"+false+"'/>";
+        templateHtml += "<span onClick='$(\"#lignesProjet\\\\["+ lignesProjetCount + "\\\\]\\\\.toDelete\").val(\"true\");$(\"#" + htmlId + "\").hide();'><img src='" + deleteIcon + "' /></span>\n";
         templateHtml += "</div>\n";
         $(idDivToAppend).append(templateHtml);
-        lignesExperienceCount++;
+        lignesProjetCount++;
+    }
+
+    function addProjet(experienceId, htmlIdExperience) {
+    	var htmlId = "projet" + projetCount;
+    	var htmlIdLigneProjet =  "ligneProjet" + lignesProjetCount
+    	var idDivToAppend="#projet"+htmlIdExperience
+        var templateHtml = "<div id='" + htmlId + "'>\n";
+        templateHtml += "<label class='sousLabel'>Projet "+(projetCount+1) +"</label>\n";
+        templateHtml += "<div class='champSaisieSousLabel'>\n";
+        templateHtml += "<span onClick='$(\"#" + htmlId + "\").remove();'><img src='" + deleteIcon + "' /></span>\n";
+        templateHtml += "</div>\n";
+        templateHtml += "<label for='projets["+projetCount+"].periode' class='sousLabel'>Période</label>\n";
+        templateHtml += "<input type='text' name='projets["+projetCount+"].periode' class='champSaisieSousLabel' id='projets[" + projetCount + "].periode'/>\n";
+        templateHtml += "<label for='projets["+projetCount+"].poste' class='sousLabel'>Poste</label>\n";
+        templateHtml += "<input type='text' name='projets["+projetCount+"].poste' class='champSaisieSousLabel' id='projets[" + projetCount + "].poste'/>\n";
+        templateHtml += "<label for='projets["+projetCount+"].titre' class='sousLabel'>Titre</label>\n";
+        templateHtml += "<input type='text' name='projets["+projetCount+"].titre' class='champSaisieSousLabel' id='projets[" + projetCount + "].titre'/>\n";
+        templateHtml += "<label for='projets["+projetCount+"].description' class='sousLabel'>Description</label>\n";
+        templateHtml += "<input type='text' name='projets["+projetCount+"].description' class='champSaisieSousLabel' id='projets[" + projetCount + "].description'/>\n";
+        templateHtml += "<label for='projets["+projetCount+"].competences' class='sousLabel'>Env. Technique</label>\n";
+        templateHtml += "<input type='text' name='projets["+projetCount+"].competences' class='champSaisieSousLabel' id='projets[" + projetCount + "].competences'/>\n";
+		templateHtml += "<input type='hidden' name='projets["+ projetCount + "].experienceId' value='"+experienceId+"'/>";
+		templateHtml += "<input type='hidden' name='projets["+ projetCount + "].experienceId' value='"+experienceId+"'/>";
+		templateHtml += "<input type='hidden' name='projets["+ projetCount + "].htmlIdExperience' value='"+htmlIdExperience+"'/>";
+		templateHtml += "<input type='hidden' name='projets["+ projetCount + "].toDelete' value='false'/>";
+		templateHtml += "<input type='hidden' name='projets["+ projetCount + "].idxExp' value='"+experienceCount+"'/>";
+        templateHtml += "<input type='hidden' name='projets["+projetCount+"].htmlId' id='projets["+projetCount+"].htmlId' value='"+projetCount+"'/>";
+        templateHtml += "<label class='lignesExperiences'>Lignes Projet</label>\n";
+        templateHtml += "<div>\n";
+        templateHtml += "	<div id='lignesProjetsList"+projetCount+"'>\n";
+        templateHtml += "		<div id='ligneProjet"+lignesProjetCount+"'>\n";
+        templateHtml += "			<div class='sousLabel'></div>\n";
+        templateHtml += "				<input type='text' name='lignesProjet["+lignesProjetCount+"].libelle' class='champSaisieSousLabel' id='lignesProjet["+lignesProjetCount+"].libelle'>\n ";
+        templateHtml += "				<input type='hidden' name='lignesProjet["+ lignesProjetCount + "].htmlIdProjet' value='"+lignesProjetCount+"'/>";
+        templateHtml += "				<input type='hidden' id='lignesProjet["+ lignesProjetCount + "].toDelete' name='lignesProjet["+ lignesProjetCount + "].toDelete' value='"+false+"'/>";
+        templateHtml += "				<span onClick='$(\"#lignesProjet\\\\["+ lignesProjetCount + "\\\\]\\\\.toDelete\").val(\"true\");$(\"#" + htmlIdLigneProjet + "\").hide();'><img src='" + deleteIcon + "' /></span>\n";
+        templateHtml += "			</div>\n";
+        templateHtml += "		</div>";
+        templateHtml += "		<div class='sousLabel'></div>";
+        templateHtml += "		<div class='champSaisieSousLabel'>";
+        templateHtml += "			<input type='button' value='Ajouter Ligne Projet' onclick='addLigneProjet(null,"+projetCount+");' />";
+        templateHtml += "		</div>";
+        templateHtml += "	</div>";
+        templateHtml += "</div>\n";
+        $(idDivToAppend).append(templateHtml);
+        projetCount++;
+        lignesProjetCount++;
     }
 
     function addExperience() {
         var htmlId = "experience" + experienceCount;
+        var htmlIdProjet = "projet" + projetCount;
+        var htmlIdLigneProjet =  "ligneProjet" + lignesProjetCount
         var templateHtml = "<div id='" + htmlId + "'>\n";
         templateHtml += "<label class='sousLabel'>Expérience "+(experienceCount+1) +"</label>\n";
         templateHtml += "<div class='champSaisieSousLabel'>\n";
@@ -169,31 +247,50 @@
         templateHtml += "</div>\n";
         templateHtml += "<label for='experiences["+experienceCount+"].periode' class='sousLabel'>Période</label>\n";
         templateHtml += "<input type='text' name='experiences["+experienceCount+"].periode' class='champSaisieSousLabel' id='experiences[" + experienceCount + "].periode' required='required'/>\n";
-        templateHtml += "<label for='experiences["+experienceCount+"].poste' class='sousLabel'>Poste</label>\n";
-        templateHtml += "<input type='text' name='experiences["+experienceCount+"].poste' class='champSaisieSousLabel' id='experiences[" + experienceCount + "].poste' required='required'/>\n";
-        templateHtml += "<label for='experiences["+experienceCount+"].libelle' class='sousLabel'>Libellé</label>\n";
-        templateHtml += "<input type='text' name='experiences["+experienceCount+"].libelle' class='champSaisieSousLabel' id='experiences[" + experienceCount + "].libelle' required='required'/>\n";
+        templateHtml += "<label for='experiences["+experienceCount+"].client' class='sousLabel'>Client</label>\n";
+        templateHtml += "<input type='text' name='experiences["+experienceCount+"].client' class='champSaisieSousLabel' id='experiences[" + experienceCount + "].client' required='required'/>\n";
         templateHtml += "<input type='hidden' name='experiences["+experienceCount+"].htmlId' id='experiences["+experienceCount+"].htmlId' value='"+experienceCount+"'/>";
-        templateHtml += "<label class='lignesExperiences'>Lignes Expérience</label>\n";
+
+        templateHtml += "<label class='lignesExperiences'>Projets</label>";
+        templateHtml +=	"<div id='projet" + (projetCount) +"'>\n";
+		
+        templateHtml += "<label class='sousLabel'>Projet "+(projetCount+1) +"</label>\n";
+        templateHtml += "<div class='champSaisieSousLabel'>\n";
+        templateHtml += "<span onClick='$(\"#" + htmlIdProjet + "\").remove();'><img src='" + deleteIcon + "' /></span>\n";
+        templateHtml += "</div>\n";
+        templateHtml += "<label for='projets["+projetCount+"].periode' class='sousLabel'>Période</label>\n";
+        templateHtml += "<input type='text' name='projets["+projetCount+"].periode' class='champSaisieSousLabel' id='projets[" + projetCount + "].periode' required='required'/>\n";
+        templateHtml += "<label for='projets["+projetCount+"].poste' class='sousLabel'>Poste</label>\n";
+        templateHtml += "<input type='text' name='projets["+projetCount+"].poste' class='champSaisieSousLabel' id='projets[" + projetCount + "].poste' required='required'/>\n";
+        templateHtml += "<label for='projets["+projetCount+"].titre' class='sousLabel'>Titre</label>\n";
+        templateHtml += "<input type='text' name='projets["+projetCount+"].titre' class='champSaisieSousLabel' id='projets[" + projetCount + "].titre' required='required'/>\n";
+        templateHtml += "<label for='projets["+projetCount+"].description' class='sousLabel'>Description</label>\n";
+        templateHtml += "<input type='text' name='projets["+projetCount+"].description' class='champSaisieSousLabel' id='projets[" + projetCount + "].description' required='required'/>\n";
+        templateHtml += "<input type='hidden' name='projets["+projetCount+"].htmlId' id='projets["+projetCount+"].htmlId' value='"+projetCount+"'/>";
+        templateHtml += "<label class='lignesExperiences'>Lignes Projet</label>\n";
         templateHtml += "<div>\n";
-        templateHtml += "	<div id='lignesExperiencesList"+experienceCount+"'>\n";
-        templateHtml += "		<div id='ligneExperience"+lignesExperienceCount+"'>\n";
+        templateHtml += "	<div id='lignesProjetsList"+projetCount+"'>\n";
+        templateHtml += "		<div id='ligneProjet"+lignesProjetCount+"'>\n";
         templateHtml += "			<div class='sousLabel'></div>\n";
-        templateHtml += "				<input type='text' name='lignesExperience["+lignesExperienceCount+"].libelle' class='champSaisieSousLabel' id='lignesExperience["+lignesExperienceCount+"].libelle'>\n ";
-        templateHtml += "				<input type='hidden' name='lignesExperience["+ lignesExperienceCount + "].htmlIdExperience' value='"+experienceCount+"'/>";
-        templateHtml += "				<input type='hidden' id='lignesExperience["+ lignesExperienceCount + "].toDelete' name='lignesExperience["+ lignesExperienceCount + "].toDelete' value='"+false+"'/>";
-        templateHtml += "				<span onClick='$(\"#lignesExperience\\\\["+ lignesExperienceCount + "\\\\]\\\\.toDelete\").val(\"true\");$(\"#" + htmlId + "\").hide();'><img src='" + deleteIcon + "' /></span>\n";
+        templateHtml += "				<input type='text' name='lignesProjet["+lignesProjetCount+"].libelle' class='champSaisieSousLabel' id='lignesProjet["+lignesProjetCount+"].libelle'>\n ";
+        templateHtml += "				<input type='hidden' name='lignesProjet["+ lignesProjetCount + "].htmlIdProjet' value='"+lignesProjetCount+"'/>";
+        templateHtml += "				<input type='hidden' id='lignesProjet["+ lignesProjetCount + "].toDelete' name='lignesProjet["+ lignesProjetCount + "].toDelete' value='"+false+"'/>";
+        templateHtml += "				<span onClick='$(\"#lignesProjet\\\\["+ lignesProjetCount + "\\\\]\\\\.toDelete\").val(\"true\");$(\"#" + htmlIdLigneProjet + "\").hide();'><img src='" + deleteIcon + "' /></span>\n";
         templateHtml += "			</div>\n";
         templateHtml += "		</div>";
         templateHtml += "		<div class='sousLabel'></div>";
         templateHtml += "		<div class='champSaisieSousLabel'>";
-        templateHtml += "			<input type='button' value='Ajouter Ligne Expérience' onclick='addLigneExperience(null,"+experienceCount+");' />";
+        templateHtml += "			<input type='button' value='Ajouter Ligne Projet' onclick='addLigneProjet(null,"+projetCount+");' />";
         templateHtml += "		</div>";
         templateHtml += "	</div>";
         templateHtml += "</div>\n";
+        
+        templateHtml += "</div>";
+        
         $("#experienceList").append(templateHtml);
         experienceCount++;
-        lignesExperienceCount++;
+        projetCount++;
+        lignesProjetCount++;
     }
 </script>
         					
