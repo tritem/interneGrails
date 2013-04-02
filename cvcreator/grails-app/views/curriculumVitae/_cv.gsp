@@ -745,7 +745,6 @@ label.error {
 							<h3>${it.periode}</h3>
 							<p>
 								${it.libelle}
-								<em>${it.diplome}</em>
 							</p>
 						</div>
 					</g:each>
@@ -756,12 +755,28 @@ label.error {
 						<div class="content">
 							<h3>${it.periode}</h3>
 							<p>
-								${it.libelle}
-								<em>${it.poste}</em>
+								<em>${it.client}</em>
 							</p>
 							<ul class="info">
-								<g:each in="${listesExperiences.get(it.id)}">
-									<li>${it.libelle }</li>
+								<g:each in="${it.projets}">
+									<p>
+										${it.periode}
+									</p>
+									<p>
+										${it.poste}
+									</p>
+									<p>
+										${it.titre}
+									</p>
+									<p>
+										${it.description}
+									</p>
+									<p>
+										${it.competences}
+									</p>
+									<g:each in="${it.lignesProjet}">
+										<li>${it.libelle }</li>
+									</g:each>
 								</g:each>
 							</ul>
 						</div>

@@ -33,14 +33,7 @@ class CurriculumVitaeController {
 		if (!curriculumVitaeInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'cv.label', default: 'CurriculumVitae'), id])
 		} else {
-			def listesExperiences = [:]
-			curriculumVitaeInstance.lignesExperience.each {
-				if (!listesExperiences.get(it.experienceId)){
-					listesExperiences.put(it.experienceId, [])
-				}
-				listesExperiences.get(it.experienceId).add(it)
-			}
-			[curriculumVitaeInstance: curriculumVitaeInstance, listesExperiences:listesExperiences]
+			[curriculumVitaeInstance: curriculumVitaeInstance]
 		}
 	}
 	

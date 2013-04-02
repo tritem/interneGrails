@@ -75,23 +75,42 @@
 						<g:each in="${curriculumVitaeInstance.formations}" var="f">
 							<span class="property-value" aria-labelledby="experiences-label"><g:fieldValue bean="${f}" field="periode"/></span>
 							<span class="property-value" aria-labelledby="experiences-label"><g:fieldValue bean="${f}" field="libelle"/></span>
-<%--							<span class="property-value" aria-labelledby="experiences-label"><g:fieldValue bean="${f}" field="diplome"/></span>--%>
 							<br />	
 						</g:each>
 					
 				</li>
 				</g:if>
 			
-<%--				<g:if test="${curriculumVitaeInstance?.lignesExperience}">--%>
-<%--				<li class="fieldcontain">--%>
-<%--					<span id="lignesExperience-label" class="property-label"><g:message code="curriculumVitae.lignesExperience.label" default="Lignes Experience" /></span>--%>
-<%--					--%>
-<%--						<g:each in="${curriculumVitaeInstance.lignesExperience}" var="l">--%>
-<%--						<span class="property-value" aria-labelledby="lignesExperience-label"><g:link controller="ligneExperience" action="show" id="${l.id}">${l?.encodeAsHTML()}</g:link></span>--%>
-<%--						</g:each>--%>
-<%--					--%>
-<%--				</li>--%>
-<%--				</g:if>--%>
+				<g:if test="${curriculumVitaeInstance?.experiences}">
+				<li class="fieldcontain">
+					<span id="lignesExperience-label" class="property-label"><g:message code="curriculumVitae.experience.label" default="Experience" /></span>
+						<g:each in="${curriculumVitaeInstance.experiences}" var="e" status="i">
+							<label class="sousLabel">
+					        	Expérience ${i+1}
+					        </label>
+							<span class="property-value" aria-labelledby="lignesExperience-label"><g:fieldValue bean="${e}" field="periode"/></span>
+							<span class="property-value" aria-labelledby="lignesExperience-label"><g:fieldValue bean="${e}" field="client"/></span>
+							<g:if test="${e?.projets}">
+									<span id="lignesExperience-label" class="property-label">&nbsp;</span>
+									<g:each in="${e.projets}" var="p" status="j">
+										<label class="sousLabel">
+						        			Projet ${j+1} 
+						        		</label>
+										<span class="property-value" aria-labelledby="lignesExperience-label"><g:fieldValue bean="${p}" field="periode"/></span>
+										<span class="property-value" aria-labelledby="lignesExperience-label"><g:fieldValue bean="${p}" field="poste"/></span>
+										<span class="property-value" aria-labelledby="lignesExperience-label"><g:fieldValue bean="${p}" field="titre"/></span>
+										<span class="property-value" aria-labelledby="lignesExperience-label"><g:fieldValue bean="${p}" field="description"/></span>
+										<g:if test="${p?.lignesProjet}">
+										<g:each in="${p.lignesProjet}" var="l">
+											<span class="property-value" aria-labelledby="lignesExperience-label"><g:fieldValue bean="${l}" field="libelle"/></span>
+										</g:each>
+										<span class="property-value" aria-labelledby="lignesExperience-label"><g:fieldValue bean="${p}" field="competences"/></span>
+										</g:if>
+									</g:each>
+							</g:if>
+						</g:each>
+				</li>
+				</g:if>
 			
 			</ol>
 			<g:form>
