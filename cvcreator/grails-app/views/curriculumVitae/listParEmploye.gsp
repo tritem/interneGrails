@@ -26,7 +26,6 @@
 					
 						<th>Lien vers l'employé</th>
 						<g:sortableColumn property="libellePoste" title="${message(code: 'curriculumVitae.libellePoste.label', default: 'Libelle Poste')}" />
-						<th>Commentaire</th>
 						<th>Date de création</th>
 						<th>Date dernière Modification</th>
 						<th>Editer</th>
@@ -40,7 +39,6 @@
 					
 						<td><g:link controller="employe" action="show" id="${curriculumVitaeInstance.employe.id}">${curriculumVitaeInstance.employe.prenom} ${curriculumVitaeInstance.employe.nom}</g:link></td>
 						<td>${fieldValue(bean: curriculumVitaeInstance, field: "libellePoste")}</td>
-						<td>${curriculumVitaeInstance.commentaire}</td>
 						<td>${curriculumVitaeInstance.dateCreated}</td>
 						<td>${curriculumVitaeInstance.lastUpdated}</td>
 						<td><g:link action="edit" id="${curriculumVitaeInstance.id}"><g:img  uri="/images/skin/database_edit.png"/></g:link></td>

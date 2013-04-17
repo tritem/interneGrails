@@ -22,6 +22,7 @@ class EmployeController {
     def save() {
         def employeInstance = new Employe(params)
 		employeInstance.agence = Agence.get(params.agence.id)
+		employeInstance.typeEmploye = TypeEmploye.get(params.typeEmploye.id)
 		
         if (!employeInstance.save(flush: true)) {
             render(view: "create", model: [employeInstance: employeInstance])
@@ -75,6 +76,7 @@ class EmployeController {
 
         employeInstance.properties = params
 		employeInstance.agence = Agence.get(params.agence.id)
+		employeInstance.typeEmploye = TypeEmploye.get(params.typeEmploye.id)
 		
         if (!employeInstance.save(flush: true)) {
             render(view: "edit", model: [employeInstance: employeInstance])

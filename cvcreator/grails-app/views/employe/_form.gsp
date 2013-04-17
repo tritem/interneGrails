@@ -34,6 +34,14 @@
 	<g:select id="agence" name="agence.id" from="${com.tritem.cvcreator.Agence.list()}" optionKey="id" optionValue="nom" required="" value="${employeInstance?.agence?.id}" class="one-to-one"/>
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: employeInstance, field: 'typeEmploye', 'error')} required">
+	<label for="typeEmploye">
+		<g:message code="curriculumVitae.typeEmploye.label" default="Type employé" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="typeEmploye" name="typeEmploye.id" from="${com.tritem.cvcreator.TypeEmploye.list()}" optionKey="id" optionValue="libelle" required="" value="${employeInstance?.typeEmploye?.id}" class="one-to-one"/>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: employeInstance, field: 'estDisponible', 'error')} ">
 	<label for="estDisponible">
 		<g:message code="employe.estDisponible.label" default="Disponible" />

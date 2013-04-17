@@ -56,5 +56,6 @@ grails.project.dependency.resolution = {
 //		compile ":cloud-foundry:1.2.3" // Décommenter pour déployer
 		compile ":jquery:1.8.3"
 		compile ":jquery-ui:1.8.24"
+		compile ":pdf:0.6"
     }
 }

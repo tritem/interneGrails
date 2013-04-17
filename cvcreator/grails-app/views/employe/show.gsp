@@ -59,6 +59,14 @@
 				</li>
 				</g:if>
 				
+				<g:if test="${employeInstance?.typeEmploye?.libelle}">
+				<li class="fieldcontain">
+					<span id="agence-label" class="property-label"><g:message code="employe.typeEmploye.label" default="Type Employé" /></span>
+					
+						<span class="property-value" aria-labelledby="nom-label"><g:fieldValue bean="${employeInstance}" field="typeEmploye.libelle"/></span>
+					
+				</li>
+				</g:if>
 				
 				<li class="fieldcontain">
 					<span id="estDisponible-label" class="property-label"><g:message code="employe.estDisponible.label" default="Disponible" /></span>

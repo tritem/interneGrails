@@ -706,7 +706,12 @@ label.error {
 			<div class="paper-top"></div>
 			<div id="paper-mid">
 				<div class="entry">
-					<g:img width="100%" uri="/images/logo_bandeau_tritem.gif"/>
+					<g:if test="${!pdf}">
+						<g:img width="100%" uri="/images/logo_bandeau_tritem.gif"/>
+					</g:if>
+					<g:if test="${pdf}">
+						<rendering:inlineJpeg bytes="${imageTritem}" />
+					</g:if>
 				</div>
 				<div class="entry">
 					<!-- Begin Image -->

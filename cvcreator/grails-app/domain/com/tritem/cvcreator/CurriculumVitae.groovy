@@ -4,6 +4,7 @@ import java.util.List;
 
 class CurriculumVitae {
 
+	String commentaire
 	Employe employe
 	String libellePoste
 	List experiences
@@ -22,12 +23,15 @@ class CurriculumVitae {
 		libellePoste nullable:false
 		dateCreated nullable:false
 		lastUpdated nullable:true
+		commentaire nullable:true
     }
 	
 	static mapping = {
 		experiences indexColumn:"idx"
 		formations indexColumn:"idx"
+		sort dateCreated: "desc"
 	}
+	
 	
 	def getCompetencesTriees(){
 		def compTriees = [:]

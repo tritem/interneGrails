@@ -7,7 +7,7 @@ class Employe {
 	Date dateNaissance
 	boolean estDisponible
 	Agence agence
-	
+	TypeEmploye typeEmploye
 	
     static constraints = {
 		nom nullable:false

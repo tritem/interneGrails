@@ -11,14 +11,21 @@
 <script type="text/javascript" src="../../js/cv/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="../../js/cv/scrollTo.js"></script>
 <script type="text/javascript" src="../../js/cv/custom.js"></script>
-
+<style text="css">
+@media print {
+    div.social { display: none }
+}
+@media screen {
+    div.social { display: block; }
+}
+</style>
 
 </head>
 <body>
 <!-- Begin Social -->
 					<div class="social">
 						<ul>
-							<li><g:link class="show" action="showCV" id="${curriculumVitaeInstance?.id}"><img
+							<li><g:link class="show" action="downloadPdf" id="${curriculumVitaeInstance?.id}"><img
 									src="../../images/cv/icn-save.jpg" title="Télécharger le CV" /></g:link></li>
 							<li><a class='north' href="javascript:window.print()"
 								title="Print"><img src="../../images/cv/icn-print.jpg" alt="" /></a></li>

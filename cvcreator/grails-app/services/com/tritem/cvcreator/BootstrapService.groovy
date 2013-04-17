@@ -11,21 +11,33 @@ class BootstrapService {
 		Agence bordeaux = new Agence(nom:"Bordeaux")
 		bordeaux.save(true)
 		assert Agence.count==3
-				
+			
+		TypeEmploye typeEmploye1 = new TypeEmploye(libelle:"salarié");
+		typeEmploye1.save(true)
+		TypeEmploye typeEmploye2 = new TypeEmploye(libelle:"indépendant");
+		typeEmploye2.save(true)
+		TypeEmploye typeEmploye3 = new TypeEmploye(libelle:"En cours d'embauche");
+		typeEmploye3.save(true)
+		assert TypeEmploye.count==3
+		
 		// initialisation des Personnes
 		Employe sebastien = new Employe(prenom:"Sebastien", nom:"Talmant", dateNaissance:new Date(), estDisponible:true)
 		sebastien.agence = nantes
+		sebastien.typeEmploye = typeEmploye1
 		println sebastien.validate()
 		println sebastien.errors
 		sebastien.save(true)
 		Employe loic = new Employe(prenom:"Loïc", nom:"Cara", dateNaissance:new Date(), estDisponible:true)
 		loic.agence = nantes
+		loic.typeEmploye = typeEmploye1
 		loic.save(true)
 		Employe thierry = new Employe(prenom:"Dimitri", nom:"Lucas", dateNaissance:new Date(), estDisponible:true)
 		thierry.agence = nantes
+		thierry.typeEmploye = typeEmploye1
 		thierry.save(true)
 		Employe dimitri = new Employe(prenom:"Thierry", nom:"Hugolin", dateNaissance:new Date(), estDisponible:true)
 		dimitri.agence = nantes
+		dimitri.typeEmploye = typeEmploye1
 		dimitri.save(true)
 		assert Employe.count==4
 		
@@ -103,7 +115,7 @@ class BootstrapService {
 		assert Experience.count == 1
 		
 		// initialisation d'un cv
-		CurriculumVitae cvSebastienTalmant = new CurriculumVitae(employe: sebastien, libellePoste: "Commercial", dateCreated:new Date(), lastUpdated:null)
+		CurriculumVitae cvSebastienTalmant = new CurriculumVitae(employe: sebastien, commentaire :" pour test, ce commentaire n'est pas visible lors de la génération du cv", libellePoste: "Commercial", dateCreated:new Date(), lastUpdated:null)
 		cvSebastienTalmant.addToCompetences(compJava7)
 		cvSebastienTalmant.addToCompetences(compJava6)
 		cvSebastienTalmant.addToCompetences(compGroovy20)

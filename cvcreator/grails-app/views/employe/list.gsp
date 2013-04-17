@@ -28,10 +28,11 @@
 						<g:sortableColumn property="prenom" title="${message(code: 'employe.prenom.label', default: 'Prenom')}" />
 						<g:sortableColumn property="dateNaissance" title="${message(code: 'employe.dateNaissance.label', default: 'Date Naissance')}" />
 						<g:sortableColumn property="agence" title="${message(code: 'employe.agence.label', default: 'Agence')}" />
+						<g:sortableColumn property="typeEmploye" title="${message(code: 'employe.agence.label', default: 'Type Employé')}" />
 						<g:sortableColumn property="estDisponible" title="${message(code: 'employe.estDisponible.label', default: 'Employé disponible')}" />
 						<th>Editer</th>
 						<th>Voir les CV</th>
-					
+						<th>Ajouter un CV</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -42,9 +43,11 @@
 						<td>${fieldValue(bean: employeInstance, field: "prenom")}</td>
 						<td><g:formatDate date="${employeInstance.dateNaissance}" /></td>
 						<td>${employeInstance.agence.nom}</td>
+						<td>${employeInstance.typeEmploye.libelle}</td>
 						<td><g:checkBox value="${employeInstance.estDisponible}" disabled="disabled" /></td>
 						<td><g:link action="edit" id="${employeInstance.id}"><g:img  uri="/images/skin/database_edit.png"/></g:link></td>
-						<td></td>
+						<td><g:link controller="curriculumVitae" action="listParEmploye" id="${employeInstance.id}"><g:img  uri="/images/skin/database_table.png"/></g:link></td>
+						<td><g:link controller="curriculumVitae" action="create" id="${employeInstance.id}"><g:img  uri="/images/skin/database_add.png"/></g:link></td>
 					</tr>
 				</g:each>
 				</tbody>

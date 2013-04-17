@@ -14,7 +14,7 @@ class LigneProjet {
 	static transients = [ 'htmlIdProjet', 'idTechnique', 'idxProjet', 'htmlId']
 	
     static constraints = {
-		libelle nullable:false
+		libelle maxSize: 40000, nullable:false
     }
 	
 	String toString(){

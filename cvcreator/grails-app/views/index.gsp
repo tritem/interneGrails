@@ -110,6 +110,7 @@
 				<h2>Available Controllers:</h2>
 				<ul>
 					<li class="controller"><g:link controller="employe">Gestion des employés</g:link></li>
+					<li class="controller"><g:link controller="typeEmploye">Gestion des types d'employé</g:link></li>
 					<li class="controller"><g:link controller="curriculumVitae">Gestion des CV</g:link></li>
 					<li class="controller"><g:link controller="typeCompetence">Gestion des types de compétence</g:link></li>
 					<li class="controller"><g:link controller="competence">Gestion des compétences possibles</g:link></li>

@@ -40,6 +40,13 @@
 					<span class="property-value" aria-labelledby="libellePoste-label"><g:fieldValue bean="${curriculumVitaeInstance}" field="libellePoste"/></span>	
 				</li>
 				</g:if>
+				
+				<g:if test="${curriculumVitaeInstance?.commentaire}">
+				<li class="fieldcontain">
+					<span id="commentaire-label" class="property-label"><g:message code="curriculumVitae.commentaire.label" default="Commentaire" /></span>
+					<span class="property-value" aria-labelledby="commentaire-label"><g:fieldValue bean="${curriculumVitaeInstance}" field="commentaire"/></span>	
+				</li>
+				</g:if>
 			
 				<g:if test="${curriculumVitaeInstance?.competences}">
 				<li class="fieldcontain">

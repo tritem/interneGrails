@@ -15,7 +15,6 @@ class Experience {
     static constraints = {
 		periode nullable:false
 		client nullable:false
-		//projets validator: { val, obj -> obj?.projets?.size() > 0 ?: "test error validator"}
     }
 
 	static hasMany=[projets:Projet]

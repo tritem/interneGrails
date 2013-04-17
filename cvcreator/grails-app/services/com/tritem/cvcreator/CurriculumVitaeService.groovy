@@ -20,7 +20,8 @@ class CurriculumVitaeService {
 				experience.removeFromProjets(projet)
 				projet.delete()
 			}
-			
+		}
+		cv.experiences.each {Experience experience ->
 			experience.projets.each {Projet projet ->
 				projet.lignesProjet.findAll {it.toDelete}.each {LigneProjet ligneProjet ->
 					projet.removeFromLignesProjet(ligneProjet)
@@ -28,7 +29,6 @@ class CurriculumVitaeService {
 				}
 			}
 		}
-
 		
 		cv.save(true)
 	}
