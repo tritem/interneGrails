@@ -1,5 +1,6 @@
 <%--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">--%>
 
+<%@page import="com.tritem.cvcreator.CurriculumVitaeService"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -13,10 +14,20 @@
 <%--<link rel="stylesheet" href="${resource(dir: 'css', file: 'cv.css')}"--%>
 <%--	type="text/css"/>--%>
 <style text="css">
+PRE
+{
+	font-family: "Courier New",Courier,mono;
+    FONT-SIZE: 13px;
+}
+pre.code {
+color:#526982;
+font-family:"Courier New",Courier,mono;
+}
+
 #cv {
-	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	font-family: courier, "Trebuchet MS", Helvetica, sans-serif;
 	background-color: #e1e0db;
-	background-image: url(../../images/cv/bg.jpg);
+	/*background-image: url(../../images/cv/bg.jpg);*/
 	background-repeat: repeat;
 	font-size:13px;
 	line-height: 17px;
@@ -114,9 +125,10 @@ a:hover {
 .entry {
 	width:720px;
 	display: block;
-	padding-top:35px;
+	padding-top:0px;
 	clear: both;
 	margin-left:4px;
+	margin-bottom:40px;
 }
 
 h1  {
@@ -151,6 +163,7 @@ p {
 	width:500px;
 	margin-left:40px;
 	float:right;	
+	margin-top: 10px;
 }
 
 p img {
@@ -165,7 +178,7 @@ div.content {
 	margin:0;
 	overflow: hidden;
 	display:block;
-	padding-top:5px;
+	padding-top:15px;
 }
 
 h3 {
@@ -266,7 +279,7 @@ ul.unordered li {
 	float:left;
 	display: block;
 	width:500px;
-	background-image:url(../../images/cv/bullet.gif);
+	/*background-image:url(../../images/cv/bullet.gif);*/
 	background-repeat: no-repeat;
 	padding-left:10px;
 	background-position: 0 .5em;
@@ -278,6 +291,7 @@ ul.info {
 	width:510px;
 	margin-left:40px;
 	list-style-type: none; 
+	margin-top:0px;
 }
 
 ul.info li {
@@ -286,21 +300,21 @@ ul.info li {
 	float:left;
 	display: block;
 	width:500px;
-	background-image:url(../../images/cv/bullet.gif);
+	/*background-image:url(../../images/cv/bullet.gif);*/
 	background-repeat: no-repeat;
 	padding-left:10px;
 	background-position: 0 .5em;
-	margin-top:7px;
+	margin-top:0px;
 	text-align:justify;
 }
 
 ul.skills {
 	margin:0;
 	padding:0;
-	float:right;
+	float: left;
 	width:500px;
 	margin-left:40px;
-	margin-top:2px;
+	margin-top:9px;
 	list-style-type: none;
 	
 }
@@ -309,8 +323,8 @@ ul.skills li {
 	margin:0;
 	padding:0;
 	float:left;
-	width:156px;
-	background-image:url(../../images/cv/bullet.gif);
+	width:90px;
+	/*background-image:url(../../images/cv/bullet.gif);*/
 	background-repeat: no-repeat;
 	padding-left:10px;
 	background-position: 0 .5em;
@@ -368,9 +382,9 @@ img.portrait {
 .self {
 	width:400px;
 	float:left;
-	padding-top:11px;
+	padding-top:0px;
 	margin-left:38px;
-	margin-bottom:15px;
+	margin-bottom:100px;
 }
 
 .self ul {
@@ -698,14 +712,14 @@ label.error {
 <body>
 
 <!-- Begin Wrapper -->
-<div id="wrapper">
-	<div class="wrapper-top"></div>
-	<div class="wrapper-mid">
+<div>
+	<div></div>
+	<div>
 		<!-- Begin Paper -->
-		<div id="paper">
-			<div class="paper-top"></div>
-			<div id="paper-mid">
-				<div class="entry">
+		<div>
+			<!-- <div class="paper-top"></div> -->
+			<div>
+				<div >
 					<g:if test="${!pdf}">
 						<g:img width="100%" uri="/images/logo_bandeau_tritem.gif"/>
 					</g:if>
@@ -714,20 +728,15 @@ label.error {
 					</g:if>
 				</div>
 				<div class="entry">
-					<!-- Begin Image -->
-					<g:img class="portrait" uri="/images/cv/image.jpg" alt="${curriculumVitaeInstance.employe.prenom} ${curriculumVitaeInstance.employe.nom}"/>
-					<!-- End Image -->
 					<!-- Begin Personal Information -->
 					<div class="self">
 						<h1 class="name">
 							${curriculumVitaeInstance.employe.prenom} ${curriculumVitaeInstance.employe.nom}
-							<span> ${curriculumVitaeInstance.libellePoste}</span>
+							<span> ${curriculumVitaeInstance.libellePoste}, ${CurriculumVitaeService.getAge(curriculumVitaeInstance.employe.dateNaissance)} ans</span>
 						</h1>
 					</div>
 					<!-- End Personal Information -->
-					
 				</div>
-				
 				<div class="entry">
 					<h2>COMPETENCES</h2>
 					<g:each in="${curriculumVitaeInstance.competencesTriees}">
@@ -760,40 +769,51 @@ label.error {
 						<div class="content">
 							<h3>${it.periode}</h3>
 							<p>
-								<em>${it.client}</em>
+								<b><em>${it.client}</em></b>
 							</p>
 							<ul class="info">
-								<g:each in="${it.projets}">
+								<g:each in="${it.projets}" var="projet">
+									<g:if test="${projet.periode}">
 									<p>
-										${it.periode}
+										${projet.periode}
 									</p>
+									</g:if>
+									<g:if test="${projet.poste}">
 									<p>
-										${it.poste}
+										${projet.poste}
 									</p>
+									</g:if>
+									<g:if test="${projet.titre}">
 									<p>
-										${it.titre}
+										${projet.titre}
 									</p>
-									<p>
-										${it.description}
-									</p>
-									<p>
-										${it.competences}
-									</p>
-									<g:each in="${it.lignesProjet}">
-										<li>${it.libelle }</li>
+									</g:if>
+									<g:if test="${projet.description}">
+									<li>
+										<pre><font face="Times New Roman" color="#000" size="3" >${projet.description}</font></pre>
+									</li>
+									</g:if>
+									<g:if test="${projet.lignesProjet}" >
+									<g:each in="${projet.lignesProjet}" var="ligneProjet">
+										<li><pre><font face="Times New Roman" color="#000" size="3" > <%=ligneProjet.libelle %></font></pre></li>
 									</g:each>
+									</g:if>
+									<g:if test="${projet.competences}">
+									<p>
+										<b>${projet.competences}</b>
+									</p>
+									</g:if>
 								</g:each>
 							</ul>
 						</div>
 					</g:each>
 				</div>
 			</div>
-			<div class="clear"></div>
-			<div class="paper-bottom"></div>
+			<div ></div>
 		</div>
 		<!-- End Paper -->
 	</div>
-	<div class="wrapper-bottom"></div>
+	<div ></div>
 </div>
 <!-- End Wrapper -->
 </body>

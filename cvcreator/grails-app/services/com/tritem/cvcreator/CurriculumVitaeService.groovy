@@ -32,4 +32,18 @@ class CurriculumVitaeService {
 		
 		cv.save(true)
 	}
+	
+	public static int getAge(Date d)
+	{
+	  Calendar curr = Calendar.getInstance();
+	  Calendar birth = Calendar.getInstance();
+	  birth.setTime(d);
+	  int yeardiff = curr.get(Calendar.YEAR) - birth.get(Calendar.YEAR);
+	  curr.add(Calendar.YEAR,-yeardiff);
+	  if(birth.after(curr))
+	  {
+		yeardiff = yeardiff - 1;
+	  }
+	  return yeardiff;
+	}
 }

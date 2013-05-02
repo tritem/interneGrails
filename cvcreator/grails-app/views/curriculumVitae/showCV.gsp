@@ -25,6 +25,8 @@
 <!-- Begin Social -->
 					<div class="social">
 						<ul>
+							<li><g:link class="show" action="show" id="${curriculumVitaeInstance?.id}"><img
+									src="../../images/cv/icn-ad.gif" title="Retour vers le CV" /></g:link></li>
 							<li><g:link class="show" action="downloadPdf" id="${curriculumVitaeInstance?.id}"><img
 									src="../../images/cv/icn-save.jpg" title="Télécharger le CV" /></g:link></li>
 							<li><a class='north' href="javascript:window.print()"

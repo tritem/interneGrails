@@ -47,7 +47,7 @@
 						<td><g:checkBox value="${employeInstance.estDisponible}" disabled="disabled" /></td>
 						<td><g:link action="edit" id="${employeInstance.id}"><g:img  uri="/images/skin/database_edit.png"/></g:link></td>
 						<td><g:link controller="curriculumVitae" action="listParEmploye" id="${employeInstance.id}"><g:img  uri="/images/skin/database_table.png"/></g:link></td>
-						<td><g:link controller="curriculumVitae" action="create" id="${employeInstance.id}"><g:img  uri="/images/skin/database_add.png"/></g:link></td>
+						<td><g:link controller="curriculumVitae" action="create" params="[idEmploye:employeInstance?.id]"><g:img  uri="/images/skin/database_add.png"/></g:link></td>
 					</tr>
 				</g:each>
 				</tbody>

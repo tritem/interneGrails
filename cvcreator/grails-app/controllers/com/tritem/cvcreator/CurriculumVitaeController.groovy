@@ -46,49 +46,67 @@ class CurriculumVitaeController {
 		[curriculumVitaeInstanceList: curriculumVitaeInstanceList, curriculumVitaeInstanceTotal: curriculumVitaeInstanceList.size()]
 	}
 
-    def create(Long id) {
-		Employe employe = Employe.get(id)
+    def create() {
+		log.debug("create --> params:${params}")
+		Long idEmploye = params.long("idEmploye")
+		Employe employe
+		if (idEmploye != null)
+		{
+			employe = Employe.get(idEmploye)
+		}
+		else
+		{
+			employe = new Employe();
+		}
 		CurriculumVitae curriculumVitaeInstance = new CurriculumVitae()
 		curriculumVitaeInstance.employe = employe
 		curriculumVitaeInstance.formations = new ArrayList<Formation>()
 		curriculumVitaeInstance.competences = new ArrayList<Competence>()
 		
-		def curriculumVitaeInstanceList = CurriculumVitae.findAllByEmploye(employe)
 		
-		Formation formation
-		if (curriculumVitaeInstanceList && curriculumVitaeInstanceList.size() > 0)
+		if (idEmploye != null)
 		{
-			CurriculumVitae cvPlusrecent = curriculumVitaeInstanceList.get(0)
-			if (cvPlusrecent.formations && cvPlusrecent.formations.size() > 0) {
-				for (Formation f in cvPlusrecent.formations)
-				{
-					formation = new Formation()
-					formation.periode = f.periode
-					formation.libelle = f.libelle
-					curriculumVitaeInstance.formations.add(formation)
-				} 
-			}else{
-				curriculumVitaeInstance.formations.add(new Formation())
-			}
-			
-			for (CurriculumVitae cv in curriculumVitaeInstanceList)
+			def curriculumVitaeInstanceList = CurriculumVitae.findAllByEmploye(employe)
+		
+			Formation formation
+			if (curriculumVitaeInstanceList && curriculumVitaeInstanceList.size() > 0)
 			{
-				if (cv?.competences)
-				{
-					for (Competence c in cv.competences)
+				CurriculumVitae cvPlusrecent = curriculumVitaeInstanceList.get(0)
+				if (cvPlusrecent.formations && cvPlusrecent.formations.size() > 0) {
+					for (Formation f in cvPlusrecent.formations)
 					{
-						if (!curriculumVitaeInstance.competences.contains(c))
+						formation = new Formation()
+						formation.periode = f.periode
+						formation.libelle = f.libelle
+						curriculumVitaeInstance.formations.add(formation)
+					} 
+				}else{
+					curriculumVitaeInstance.formations.add(new Formation())
+				}
+				
+				for (CurriculumVitae cv in curriculumVitaeInstanceList)
+				{
+					if (cv?.competences)
+					{
+						for (Competence c in cv.competences)
 						{
-							curriculumVitaeInstance.competences.add(c)
+							if (!curriculumVitaeInstance.competences.contains(c))
+							{
+								curriculumVitaeInstance.competences.add(c)
+							}
 						}
 					}
 				}
+			}else{
+				curriculumVitaeInstance.competences = new ArrayList<Competence>()
+				curriculumVitaeInstance.formations.add(new Formation())
 			}
-		}else{
+		}
+		else
+		{
 			curriculumVitaeInstance.competences = new ArrayList<Competence>()
 			curriculumVitaeInstance.formations.add(new Formation())
 		}
-		
 		
 		
 		LigneProjet ligneProjet = new LigneProjet()
@@ -103,7 +121,6 @@ class CurriculumVitaeController {
 		
 		def toutesCompetencesTriees = [:]
 		toutesCompetencesTriees = competenceService.getToutesCompetencesTriees()
-		def listesExperiencesTriees = [:]
 		int nbLignesProjet = 1
 		int nbProjet = 1
 		
@@ -222,7 +239,6 @@ class CurriculumVitaeController {
 				nbLignesProjet += projet.lignesProjet.size()
 			}
 		}
-		
         [curriculumVitaeInstance: curriculumVitaeInstance,
 			toutesCompetencesTriees:toutesCompetencesTriees,
 			nbProjet:nbProjet,
@@ -237,7 +253,7 @@ class CurriculumVitaeController {
 		int i=0
 
 		// Construction de la collection des projets
-		while (params."experiences[${i}]") {
+		/*while (params."experiences[${i}]") {
 			Experience experience = new Experience()
 			experience.periode = params."experiences[${i}].periode"
 			experience.client = params."experiences[${i}].client"
@@ -246,7 +262,7 @@ class CurriculumVitaeController {
 			listesExperiences.add(experience)
 			log.debug "experiences[${i}]:"+experience
 			i++
-		}
+		}*/
 		
 		// Construction de la collection des projets
 		i=0
@@ -342,7 +358,7 @@ class CurriculumVitaeController {
 				listLigneTemp = listesLignesProjet.get(projet.htmlId)
 				for (LigneProjet ligneProjet in listLigneTemp) {
 					if (!ligneProjet.idTechnique){
-						projet.addToLignesProjet(ligneProjet)
+						experience.projets[projet.idxExp].addToLignesProjet(ligneProjet)
 					} else {
 						experience.projets[projet.idxExp].lignesProjet[ligneProjet.idxProjet].libelle = ligneProjet.libelle
 						experience.projets[projet.idxExp].lignesProjet[ligneProjet.idxProjet].toDelete = ligneProjet.toDelete
@@ -394,6 +410,11 @@ class CurriculumVitaeController {
 			return
 		}
 		
+		def toutesCompetencesTriees = [:]
+		toutesCompetencesTriees = competenceService.getToutesCompetencesTriees()
+		int nbLignesProjet = 0
+		int nbProjet = 0
+		
 		CurriculumVitae newCurriculumVitae = new CurriculumVitae()
 		newCurriculumVitae.employe = cvADupliquer.employe
 		
@@ -440,7 +461,9 @@ class CurriculumVitaeController {
 					newLigneProjet = new LigneProjet()
 					newLigneProjet.libelle = ligneProjetADupliquer.libelle
 					newProjet.addToLignesProjet(newLigneProjet)
+					nbLignesProjet++
 				}
+				nbProjet++
 			}
 		}
 		if (!newCurriculumVitae.save(flush: true)) {
@@ -449,7 +472,10 @@ class CurriculumVitaeController {
 		}
 
 		flash.message = message(code: 'default.created.message', args: [message(code: 'curriculumVitae.label', default: 'CurriculumVitae'), newCurriculumVitae.id])
-		render(view: "edit", model: [curriculumVitaeInstance: newCurriculumVitae])
+		render(view: "edit", model: [curriculumVitaeInstance: newCurriculumVitae,
+			toutesCompetencesTriees:toutesCompetencesTriees,
+			nbProjet:nbProjet,
+			nbLignesProjet:nbLignesProjet])
 		log.debug("--< save params:${params}")
 	}
 	

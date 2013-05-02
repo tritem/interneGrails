@@ -4,9 +4,7 @@
 	<label for="employe">
 		<g:message code="curriculumVitae.employe.label" default="Employe *" />
 	</label>
-	<g:textField name="employe.nom" value="${curriculumVitaeInstance?.employe?.nom}" disabled="disabled" />
-	<g:textField name="employe.prenom" value="${curriculumVitaeInstance?.employe?.prenom}" disabled="disabled"/>
-	<input type="hidden" name="employe.id" value="${curriculumVitaeInstance?.employe?.id}" />
+	<g:select id="employe" name="employe.id" from="${com.tritem.cvcreator.Employe.list()}" optionKey="id" optionValue="${{it.prenom + ' '+ it.nom} }" required="" value="${curriculumVitaeInstance?.employe?.id}" class="many-to-one"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: curriculumVitaeInstance, field: 'libellePoste', 'error')} ">
@@ -113,7 +111,7 @@
 		        		<label for="projets[${counterProjets}].titre" class="sousLabel">Titre</label>
 		        		<g:textField name='projets[${counterProjets}].titre' value='${projet.titre}' class="champSaisieSousLabel"/>
 		        		<label for="projets[${counterProjets}].description" class="sousLabel">Description</label>
-		        		<g:textField name='projets[${counterProjets}].description' value='${projet.description}' class="champSaisieSousLabel"/>
+		        		<g:textArea name='projets[${counterProjets}].description' value='${projet.description}' class="champSaisieSousLabel"/>
 		        		<label for="projets[${counterProjets}].competences" class="sousLabel">Env. Technique</label>
 		        		<g:textField name='projets[${counterProjets}].competences' value='${projet.competences}' class="champSaisieSousLabel"/>
 		        		<input type="hidden" name="projets[${counterProjets}].experienceId" value="${experience.id}"/>
@@ -215,7 +213,7 @@
         templateHtml += "<label for='projets["+projetCount+"].titre' class='sousLabel'>Titre</label>\n";
         templateHtml += "<input type='text' name='projets["+projetCount+"].titre' class='champSaisieSousLabel' id='projets[" + projetCount + "].titre'/>\n";
         templateHtml += "<label for='projets["+projetCount+"].description' class='sousLabel'>Description</label>\n";
-        templateHtml += "<input type='text' name='projets["+projetCount+"].description' class='champSaisieSousLabel' id='projets[" + projetCount + "].description'/>\n";
+        templateHtml += "<textarea name='projets["+projetCount+"].description' class='champSaisieSousLabel' id='projets[" + projetCount + "].description'></textarea>\n";
         templateHtml += "<label for='projets["+projetCount+"].competences' class='sousLabel'>Env. Technique</label>\n";
         templateHtml += "<input type='text' name='projets["+projetCount+"].competences' class='champSaisieSousLabel' id='projets[" + projetCount + "].competences'/>\n";
 		templateHtml += "<input type='hidden' name='projets["+ projetCount + "].experienceId' value='"+experienceId+"'/>";
@@ -275,7 +273,7 @@
         templateHtml += "<label for='projets["+projetCount+"].titre' class='sousLabel'>Titre</label>\n";
         templateHtml += "<input type='text' name='projets["+projetCount+"].titre' class='champSaisieSousLabel' id='projets[" + projetCount + "].titre'/>\n";
         templateHtml += "<label for='projets["+projetCount+"].description' class='sousLabel'>Description</label>\n";
-        templateHtml += "<input type='text' name='projets["+projetCount+"].description' class='champSaisieSousLabel' id='projets[" + projetCount + "].description'/>\n";
+        templateHtml += "<textarea name='projets["+projetCount+"].description' class='champSaisieSousLabel' id='projets[" + projetCount + "].description'></textarea>\n";
         templateHtml += "<label for='projets["+projetCount+"].competences' class='sousLabel'>Env. Technique</label>\n";
         templateHtml += "<input type='text' name='projets["+projetCount+"].competences' class='champSaisieSousLabel' id='projets[" + projetCount + "].competences'/>\n";
 		templateHtml += "<input type='hidden' name='projets["+ projetCount + "].htmlIdExperience' value='"+htmlId+"'/>";

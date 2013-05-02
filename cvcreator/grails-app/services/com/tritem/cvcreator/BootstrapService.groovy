@@ -1,5 +1,7 @@
 package com.tritem.cvcreator
 
+import java.nio.charset.Charset;
+
 class BootstrapService {
 
     def initModele() {
@@ -27,7 +29,7 @@ class BootstrapService {
 		println sebastien.validate()
 		println sebastien.errors
 		sebastien.save(true)
-		Employe loic = new Employe(prenom:"Loïc", nom:"Cara", dateNaissance:new Date(), estDisponible:true)
+		Employe loic = new Employe(prenom:new String("loïc".getBytes(),Charset.forName("UTF-8")), nom:"Cara", dateNaissance:new Date(), estDisponible:true)
 		loic.agence = nantes
 		loic.typeEmploye = typeEmploye1
 		loic.save(true)
@@ -40,6 +42,13 @@ class BootstrapService {
 		dimitri.typeEmploye = typeEmploye1
 		dimitri.save(true)
 		assert Employe.count==4
+		
+		/*User admin = new User(login:"admin", password:"password",email:"Administrator",  role:"admin", employe: sebastien)
+        admin.save()
+      
+        User user1 = new User(login:"dimitri", password:"password", email:"dimitri lucas", role:"employe", employe : dimitri)
+		user1.save()
+		assert User.count==2*/
 		
 		// initialisation des types de compétence
 		TypeCompetence langageProgrammation = new TypeCompetence(libelle:"Langages de programmation")

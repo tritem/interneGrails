@@ -22,10 +22,9 @@
 			</g:if>
 			<g:form action="list" >
 				<fieldset class="form">				
-					<div class="fieldcontain ${hasErrors(bean: competenceInstance, field: 'typeCompetence', 'error')} required">
+					<div class="fieldcontain">
 						<label for="typeCompetence">
 							Type de compétence
-							<span class="required-indicator">*</span>
 						</label>
 						<g:select id="typeCompetence" name="typeCompetenceId" 
 						from="${com.tritem.cvcreator.TypeCompetence.list()}" 

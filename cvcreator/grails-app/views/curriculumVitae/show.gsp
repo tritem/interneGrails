@@ -59,22 +59,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${curriculumVitaeInstance?.experiences}">
-				<li class="fieldcontain">
-					<span id="experiences-label" class="property-label"><g:message code="curriculumVitae.experiences.label" default="Experiences" /></span>
-						<g:each in="${curriculumVitaeInstance.experiences}" var="e">
-							<span class="property-value" aria-labelledby="experiences-label"><g:fieldValue bean="${e}" field="periode"/></span>
-<%--							<span class="property-value" aria-labelledby="experiences-label"><g:fieldValue bean="${e}" field="poste"/></span>--%>
-<%--							<span class="property-value" aria-labelledby="experiences-label"><g:fieldValue bean="${e}" field="libelle"/></span>--%>
-<%--							<g:each in="${e.lignesExperience}" var="l">--%>
-<%--								<span class="property-value" aria-labelledby="experiences-label"><g:fieldValue bean="${l}" field="libelle"/></span>--%>
-<%--							</g:each>--%>
-							<br />
-						</g:each>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${curriculumVitaeInstance?.formations}">
 				<li class="fieldcontain">
 					<span id="formations-label" class="property-label"><g:message code="curriculumVitae.formations.label" default="Formations" /></span>
@@ -106,10 +90,10 @@
 										<span class="property-value" aria-labelledby="lignesExperience-label"><g:fieldValue bean="${p}" field="periode"/></span>
 										<span class="property-value" aria-labelledby="lignesExperience-label"><g:fieldValue bean="${p}" field="poste"/></span>
 										<span class="property-value" aria-labelledby="lignesExperience-label"><g:fieldValue bean="${p}" field="titre"/></span>
-										<span class="property-value" aria-labelledby="lignesExperience-label"><g:fieldValue bean="${p}" field="description"/></span>
+										<span class="property-value" aria-labelledby="lignesExperience-label"><pre><font face="Verdana" color="#515151" size="1" ><g:fieldValue bean="${p}" field="description"/></font></pre></span>
 										<g:if test="${p?.lignesProjet}">
 										<g:each in="${p.lignesProjet}" var="l">
-											<span class="property-value" aria-labelledby="lignesExperience-label"><g:fieldValue bean="${l}" field="libelle"/></span>
+											<span class="property-value" aria-labelledby="lignesExperience-label"><pre><font face="Verdana" color="#515151" size="1" ><g:fieldValue bean="${l}" field="libelle"/></font></pre></span>
 										</g:each>
 										<span class="property-value" aria-labelledby="lignesExperience-label"><g:fieldValue bean="${p}" field="competences"/></span>
 										</g:if>
@@ -127,6 +111,7 @@
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 					<g:link class="show" action="showCV" id="${curriculumVitaeInstance?.id}">Voir le CV</g:link>
 					<g:link class="show" action="pdf" id="${curriculumVitaeInstance?.id}">Télécharger le CV</g:link>
+					<g:link class="show" action="duplique" id="${curriculumVitaeInstance?.id}">Dupliquer le CV</g:link>
 				</fieldset>
 			</g:form>
 		</div>
