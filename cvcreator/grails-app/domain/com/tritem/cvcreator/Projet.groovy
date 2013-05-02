@@ -22,7 +22,7 @@ class Projet {
 		periode nullable:true
 		poste nullable:true
 		titre nullable:true 
-		description maxSize: 40000, nullable:true
+		description maxSize: 5000, nullable:true
 		competences nullable:true
 	}
 	
